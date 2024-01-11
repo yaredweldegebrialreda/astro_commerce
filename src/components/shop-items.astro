@@ -1,29 +1,23 @@
 ---
-function formatCurrency(amount:number){
-    return new Intl.NumberFormat('en-US',{
-        currency:'usd',
-        style:'currency'
-    }).format(amount)
-}
-
-
+import {formatCurrency} from '../utils/utils.ts'
+import {AddToCart} from './add-to-cart';
 const result=await fetch('https://astro-frontend-masters-api.netlify.app/api/products');
 
 if(!result.ok){console.error(result)}
 
-const shopItems=await result.json();
+const shopItems:ShopItem[]=await result.json();
 ---
 
 <section class="shop-items">
 {
-   shopItems.map((item)=>{
+   shopItems.map((item:ShopItem)=>{
     return (
         <div class="item">
              <img src={item.image.src} alt={item.image.alt}/>
              <h2>{item.title}</h2>
              <p>{item.description}</p>
              <p class="price">{formatCurrency(item.price)}</p>
-             <p>TODO: add to cart button</p>
+            <AddToCart item={item} client:only="react"/>
         </div>
         
     )
