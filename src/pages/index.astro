@@ -1,6 +1,7 @@
 ---
 import Layout from '../layout/default.astro';
 import heroImage from "../images/sandwich-hero.jpg";
+import ShopItems from "../components/shop-items.astro";
 ---
 <Layout>
 	<section class="block hero"> 
@@ -19,6 +20,11 @@ import heroImage from "../images/sandwich-hero.jpg";
     loading="eager"
     />
 	</section>
+  <section class="block products">
+	 <ShopItems count={3} addToCart={false}/>
+     <p class="shop-link"><a href="/shop">Show All Sandwich Kits &rarr;</a> </p>
+  </section>
+
 </Layout>
 	
 <style>
